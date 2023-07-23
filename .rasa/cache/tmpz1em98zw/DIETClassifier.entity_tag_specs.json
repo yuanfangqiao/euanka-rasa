@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-address",
+      "2": "I-address",
+      "3": "L-address",
+      "4": "U-address",
+      "5": "B-date_time",
+      "6": "I-date_time",
+      "7": "L-date_time",
+      "8": "U-date_time",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-address": 1,
+      "I-address": 2,
+      "L-address": 3,
+      "U-address": 4,
+      "B-date_time": 5,
+      "I-date_time": 6,
+      "L-date_time": 7,
+      "U-date_time": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]
