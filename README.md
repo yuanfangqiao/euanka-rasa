@@ -1,6 +1,11 @@
 # euanka-rasa
 
 
+### 架构
+#### 官方架构
+官方介绍：https://rasa.com/docs/rasa/arch-overview
+![Architecture-official](./.assets/architecture-official.png)
+
 ### 安装
 
 安装 conda python3.9
@@ -59,3 +64,56 @@ rasa run -vv --cors "*"
 actions服务
 rasa run actions
 
+
+### docker 
+
+#### rasa
+
+rasa docker 镜像构建
+```
+docker build -t yfq/rasa:0.1 .
+```
+
+镜像运行，本地构建的包
+```
+docker run yfq/rasa:0.1
+```
+
+
+#### rasa-action
+
+构建
+```
+docker build . -f Dockerfile_action  -t  yfq/rasa-action:0.1
+```
+
+运行
+```
+docker run yfq/rasa-action:0.1 
+```
+
+#### rasa 和 rasa-action 合并运行
+
+官方参考操作：https://rasa.com/docs/rasa/docker/building-in-docker/
+
+创建一个docker网络，使得两个docker容器可以自己内部连接
+
+```
+docker network create my-project
+```
+
+启动 action-sdk:
+```
+docker run -d --net my-project --name action-server yfq/rasa-action:0.1 
+```
+
+启动rasa
+```
+docker run -d -p 5005:5005 --net my-project yfq/rasa:0.1
+```
+
+### 测试
+返回的是中文编码，确实存在暂时无法显示
+```
+curl -XPOST localhost:5005/webhooks/rest/webhook -H "Content-Type: application/json" -d '{"message":"今天深圳天气"}'
+```
